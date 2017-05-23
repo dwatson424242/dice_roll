@@ -47,37 +47,6 @@ global.pad = function(n, width, z) {
 }
 
 
-// This is a failed attempt to chain dice rolls
-// Attempted to recursively encrypt data, but it grows too large to handle.
-global.chain_dice_rolls_failed = function(_turns, _dice_count, _secret) {
-	var first_secret = _secret;
-	var distribute_evenly = false;
-	var totals = _turns * _dice_count;
-
-	var last_encrypted = Buffer.from('00000000000000000000000000000000');
-	for (var j = 0; j < totals; j++) {
-			var roll;
-			if(distribute_evenly) {
-				roll = sodium.randombytes_uniform(6) + 1;
-			} else {
-				roll = (sodium.randombytes_random() % 6) + 1;
-			}
-			console.log(roll);
-			var encrypted_roll = encrypt(roll.toString()+'0'+sodium.to_hex(last_encrypted).toString(), _secret);
-			last_encrypted = encrypted_roll; 
-			last_secret = (roll + '0' + sodium.to_hex(encrypted_roll).toString()).slice(0, 32);
-
-			_secret = Buffer.from(last_secret);
-
-			console.log(sodium.to_hex(encrypted_roll));
-			console.log(sodium.to_hex(last_secret));
-	};
-
-	var encrypted_roll = encrypt(sodium.to_hex(encrypted_roll).toString(), first_secret);
-
-	return sodium.to_hex(encrypted_roll).toString();
-}
-
 global.chain_dice_rolls = function(_count, _secret) {
 	var distribute_evenly = false;
 	var totals = _count;
