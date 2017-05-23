@@ -83,9 +83,13 @@ global.get_next_dice_roll = function(_encrypted_string, _secret) {
 	while(used > 0) {
 		used = decrypted_rolls.charAt(cnt++);
 		if(cnt > decrypted_rolls.length) {
-			// This may need to simply return [false, _encrypted_string]
+			return [false, _encrypted_string]; 
+			
+			/* When we run out of rolls, this can rebuild the string.
+			// Commented out for now.
 			_encrypted_string = chain_dice_rolls(midway, _secret)
 			return get_next_dice_roll(_encrypted_string, _secret);
+			*/
 		}
 	}
 	
