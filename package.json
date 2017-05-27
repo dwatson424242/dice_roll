@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {},
   "dependencies": {
+    "inquirer": "^3.0.6",
     "libsodium": "^0.5.1",
     "libsodium-wrappers": "^0.5.1"
   }
