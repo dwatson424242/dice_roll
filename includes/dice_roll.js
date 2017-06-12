@@ -133,6 +133,14 @@ class DiceRoll {
       return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
     }
 
+    hex2string(hexx) {
+        var hex = hexx.toString();//force conversion
+        var str = '';
+        for (var i = 0; i < hex.length; i += 2)
+            str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+        return str;
+    }
+
 }
 
 
